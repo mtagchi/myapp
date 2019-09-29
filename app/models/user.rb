@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  mount_uploader :image, ImageUploader
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
 
@@ -12,7 +14,7 @@ class User < ApplicationRecord
         password: Devise.friendly_token[0, 20],
         name: auth.info.name,
         username: auth.info.nickname,
-        image: auth.info.image
+        remote_image_url: auth.info.image
       )
     end
     return user
