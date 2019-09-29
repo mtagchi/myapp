@@ -3,6 +3,7 @@
 - if user_signed_in?
   You are already signed in.
   = @user.name
+  = @user.username
   = @user.uid
   = link_to "Twitter", "https://twitter.com/#{@user.username}"
   = link_to "Log out", destroy_user_session_path, method: :delete
