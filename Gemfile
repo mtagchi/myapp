@@ -19,7 +19,6 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 # Upload images to S3
 gem 'carrierwave'
-gem 'fog'
 # Sign-up/sign-in through Twitter authentication
 gem 'devise'
 gem 'omniauth'
