@@ -18,6 +18,7 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Upload images to S3
+gem "aws-sdk-s3"
 gem 'carrierwave'
 gem 'fog-aws'
 gem 'mini_magick'
