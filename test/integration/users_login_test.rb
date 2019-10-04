@@ -22,6 +22,8 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_select "a[href=?]", user_twitter_omniauth_authorize_path, count: 0
     assert @user.name
+    assert @user.username
+    assert_select "img[src]"
     assert_select "a[href=?]", "https://twitter.com/#{@user.username}"
     assert_select "a[href=?]", destroy_user_session_path
     delete destroy_user_session_path

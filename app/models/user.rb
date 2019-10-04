@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  validates :name, presence: true
+  validates :image, presence: true
+  validates :username, presence: true, uniqueness: true
   mount_uploader :image, ImageUploader
 
   devise :database_authenticatable, :registerable,
