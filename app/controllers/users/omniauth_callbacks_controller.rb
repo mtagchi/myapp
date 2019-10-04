@@ -2,7 +2,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def twitter
     callback_from :twitter
   end
-  
+
   def callback_from(provider)
     provider = provider.to_s
     @user = User.find_for_oauth(request.env['omniauth.auth'])
@@ -17,5 +17,5 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def after_sign_in_path_for(resource)
     root_path
- end
+  end
 end
