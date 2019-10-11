@@ -11,8 +11,12 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5'
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 4.0'
+# Use CoffeeScript for .coffee assets and views
+gem 'coffee-rails', '~> 5.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -29,8 +33,12 @@ gem 'omniauth-twitter'
 # Use Bootstrap as CSS framework
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 # Use Haml despite of ERB view files
 gem 'haml-rails'
+# Use acts-as-taggable-on for event tags
+gem 'acts-as-taggable-on'
+gem 'tag-it-rails'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password

@@ -31,4 +31,22 @@ class UserTest < ActiveSupport::TestCase
     @user.username = "  "
     assert_not @user.valid?
   end
+
+  test "event should be destroyed when host user destroyed" do
+    @user.save
+    @user.events.create!(
+      title: "Sample Event",
+      date: "2019-05-15",
+      start_time: "19:00",
+      end_time: "21:00",
+      no_of_participants: 4,
+      text: "sushi party!!!",
+      restaurant_name: "jiro-sushi",
+      address: "Ginza",
+      restaurant_url: "https://railstutorial-ja.herokuapp.com"
+    )
+    assert_difference "Event.count", -1 do
+      @user.destroy
+    end
+  end
 end
