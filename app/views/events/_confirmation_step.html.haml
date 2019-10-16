@@ -1,0 +1,71 @@
+%h2 入力内容確認
+
+.form-group
+  = f.label :title, "タイトル"
+  = f.hidden_field :title
+  = @event.title
+
+.form-group
+  = f.label :date, "日程"
+  = f.hidden_field :date
+  = @event.date
+
+.form-group
+  = f.label "時間"
+  = f.hidden_field :start_time
+  = f.hidden_field :end_time
+  - if @event.start_time == nil && @event.end_time == nil
+    未定
+  - elsif @event.start_time != nil
+    = @event.start_time
+    〜
+    = @event.end_time unless @event.end_time == nil
+  - else
+    未定〜
+    = @event.end_time
+
+.form-group
+  = f.label :no_of_participants, "参加可能人数"
+  = f.hidden_field :no_of_participants
+  - if @event.no_of_participants == nil
+    未記入
+  - else
+    = @event.no_of_participants
+
+.form-group
+  = f.label :tag_list, "タグ"
+  = f.hidden_field :tag_list
+  - if @event.tag_list == nil
+    未記入
+  - else
+    - @event.tag_list.each do |tag|
+      = tag
+
+.form-group
+  = f.label :text, "説明"
+  = f.hidden_field :text
+  = @event.text
+
+.form-group
+  = f.label :restaurant_name, "レストラン名"
+  = f.hidden_field :restaurant_name
+  - if @event.restaurant_name == nil
+    未記入
+  - else
+    = @event.restaurant_name
+
+.form-group
+  = f.label :address, "住所"
+  = f.hidden_field :address
+  - if @event.address == nil
+    未記入
+  - else
+    = @event.address
+
+.form-group
+  = f.label :restaurant_url, "レストランURL"
+  = f.hidden_field :restaurant_url
+  - if @event.restaurant_url == nil
+    未記入
+  - else
+    = @event.restaurant_url

@@ -10,14 +10,14 @@
   = f.label :date, "日程"
   %span.form-require 必須
   %br
-  = f.date_select :date, class: 'form-control'
+  = f.text_field :date, class: 'form-control'
 
 .form-group
   = f.label "時間(未定でも可)"
   %br
-  = f.time_select :start_time, class: 'form-control'
+  = f.text_field :start_time, class: 'form-control'
   〜
-  = f.time_select :end_time, class: 'form-control'
+  = f.text_field :end_time, class: 'form-control'
 
 .form-group
   = f.label :no_of_participants, "参加可能人数"
@@ -25,7 +25,7 @@
   = f.number_field :no_of_participants, class: 'form-control'
 
 .form-group
-  = f.label "タグ"
+  = f.label :tag_list, "タグ"
   %br
   %ul#event-tags
 
@@ -33,4 +33,4 @@
   = f.label :text, "説明"
   %span.form-require 必須
   %br
-  = f.text_field :text, class: 'form-control'
+  = f.text_area :text, class: 'form-control'

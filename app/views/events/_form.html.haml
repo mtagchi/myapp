@@ -2,4 +2,4 @@
   = render 'shared/error_messages', object: f.object
   = render "#{event.current_step}_step", f: f
   %p=f.submit "次へ"
-  %p=f.submit "戻る", name: 'back_button' unless event.first_step?
+  %p=f.submit "戻る", name: 'back_button' unless @event.first_step?

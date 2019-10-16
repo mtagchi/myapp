@@ -27,7 +27,7 @@ class Event < ApplicationRecord
   end
 
   def last_step?
-    current_step == steps.last?
+    current_step == steps.last
   end
 
   def all_valid?

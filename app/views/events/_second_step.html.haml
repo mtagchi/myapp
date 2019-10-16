@@ -1,0 +1,16 @@
+%h2 イベント開催地
+
+.form-group
+  = f.label :restaurant_name, "レストラン名"
+  %br
+  = f.text_field :restaurant_name, class: 'form-control'
+
+.form-group
+  = f.label :address, "住所"
+  %br
+  = f.text_field :address, class: 'form-control'
+
+.form-group
+  = f.label :restaurant_url, "レストランURL(ホームページ、レビューサイトなど)"
+  %br
+  = f.text_field :restaurant_url, class: 'form-control'

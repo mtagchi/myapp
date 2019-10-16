@@ -11,14 +11,13 @@ class EventsController < ApplicationController
   def new
     session[:event_params] ||= {}
     @event = Event.new
-    @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
+    @event.current_step = session[:event_step]
   end
 
   def create
     session[:event_params].deep_merge!(event_params)
     @event = current_user.events.build(session[:event_params])
-    @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
-    @event.current_step = session[:order_step]
+    @event.current_step = session[:event_step]
     if @event.valid?
       if params[:back_button]
         @event.previous_step
@@ -33,7 +32,7 @@ class EventsController < ApplicationController
       render :new
     else
       session[:event_step] = session[:event_params] = nil
-      redirect_to @event
+      redirect_to root_path
     end
   end
 
@@ -56,6 +55,7 @@ class EventsController < ApplicationController
   def set_event
     @event = Event.find(params[:id])
   end
+
   def event_params
     params.require(:event).permit(:title, :date, :start_time, :end_time, :no_of_participants, :text, :restaurant_name, :address, :restaurant_url, :tag_list)
   end
