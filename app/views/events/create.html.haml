@@ -1,4 +1,4 @@
 .event-created
   %h5 イベントを投稿しました。
-  = link_to 'ツイートする', "http://twitter.com/intent/tweet?text=#{@event.title}&url=https://protected-taiga-49884.herokuapp.com/events/#{@event.id}", class: 'btn btn-twitter rounded-pill twitter-share-button'
+  = link_to 'ツイートする', "http://twitter.com/intent/tweet?text=#{@event.title}&url=https://protected-taiga-49884.herokuapp.com/events/#{@event.id}", class: 'btn btn-twitter rounded-pill twitter-share-button', target: :_blank
   = link_to '戻る', root_path, class: 'btn btn-light rounded-pill'
