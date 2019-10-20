@@ -1,0 +1,45 @@
+nav.header {
+  background-color: $header;
+  .navbar-header {
+    width: 800px;
+    margin: 0 auto;
+    display: flex;
+    .navbar-left {
+      margin-right: auto;
+    }
+    .navbar-right {
+      margin-left: auto;
+      .btn-group {
+        #dropdownMenuButton {
+          padding: 0;
+          margin-left: 30px;
+          img {
+            height: 38px;
+            width: 38px;
+            padding: 0;
+            border-radius: 50%;
+          }
+        }
+        .dropdown-menu {
+          margin-top: 8px;
+        }
+      }
+      .btn-twitter {
+        background-color: $twitter;
+        color: white;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+nav.footer {
+  padding: 0;
+  .navbar-footer {
+    margin: auto;
+    a {
+      font-size: 1rem;
+      color: $header;
+    }
+  }
+}

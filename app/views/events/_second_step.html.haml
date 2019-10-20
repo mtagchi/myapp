@@ -1,16 +1,22 @@
-%h2 イベント開催地
+.form-title
+  %h2 イベント開催地
+  = link_to 'やめる', root_path, class: 'btn btn-link'
 
-.form-group
-  = f.label :restaurant_name, "レストラン名"
-  %br
-  = f.text_field :restaurant_name, class: 'form-control'
+.form-main
+  .form-group
+    = f.label :restaurant_name, "レストラン名"
+    %br
+    = f.text_field :restaurant_name, class: 'form-control'
 
-.form-group
-  = f.label :address, "住所"
-  %br
-  = f.text_field :address, class: 'form-control'
+  .form-group
+    = f.label :address, "場所"
+    %br
+    = f.text_field :address, class: 'form-control'
 
-.form-group
-  = f.label :restaurant_url, "レストランURL(ホームページ、レビューサイトなど)"
-  %br
-  = f.text_field :restaurant_url, class: 'form-control'
+  .form-group
+    = f.label :restaurant_url, "レストランURL(ホームページ、レビューサイトなど)"
+    %br
+    = f.text_field :restaurant_url, class: 'form-control'
+
+  =f.submit "次へ", class: 'btn btn-primary'
+  =f.submit "戻る", name: 'back_button', class: 'btn btn-light rounded-pill'

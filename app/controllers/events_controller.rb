@@ -9,20 +9,34 @@ class EventsController < ApplicationController
   end
 
   def new
-    session[:event_params] ||= {}
     @event = Event.new
-    @event.current_step = session[:event_step]
+    @event.current_step = @event.steps.first
+  end
+
+  def confirmarion
   end
 
   def create
-    session[:event_params].deep_merge!(event_params)
-    @event = current_user.events.build(session[:event_params])
+    @event = current_user.events.build(event_params)
     @event.current_step = session[:event_step]
+    if @event.first_step?
+      if event_params["start_time(4i)"].blank?
+        @event.start_time = nil
+      end
+      if event_params["end_time(4i)"].blank?
+        @event.end_time = nil
+      end
+    end
     if @event.valid?
       if params[:back_button]
         @event.previous_step
       elsif @event.last_step?
-        @event.save if @event.all_valid?
+        if event_params[:tag_list]
+          tag_list = event_params[:tag_list].split(',')
+        else
+          tag_list = params[:tag_list].split(',')
+        end
+        @event.save && @event.save_tags(tag_list) if @event.all_valid?
       else
         @event.next_step
       end
@@ -31,20 +45,29 @@ class EventsController < ApplicationController
     if @event.new_record?
       render :new
     else
-      session[:event_step] = session[:event_params] = nil
-      redirect_to root_path
+      session[:event_step] = nil
     end
   end
 
   def edit
+    @event.current_step = session[:event_step]
+    @tag_list = @event.tags.pluck(:name).join(',')
   end
 
   def update
-    if @event.update(event_params)
-      redirect_to root_path
-    else
-      render :edit
+    tag_list = @event.tags.pluck(:name).join(',')
+    if @event.valid?
+      if params[:back_button]
+        @event.previous_step
+      elsif @event.last_step?
+        @event.update_attributes(session[:event_params]) && @event.save_tags(tag_list) if @event.all_valid?
+      else
+        @event.next_step
+      end
+      session[:event_step] = @event.current_step
     end
+    session[:event_step] = session[:event_params] = nil
+    redirect_to root_path
   end
 
   def destroy
@@ -57,6 +80,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:title, :date, :start_time, :end_time, :no_of_participants, :text, :restaurant_name, :address, :restaurant_url, :tag_list)
+    params.require(:event).permit(:title, :text, :date, :start_time, :end_time, :no_of_participants, :tag_list, :restaurant_name, :address, :restaurant_url)
   end
 end

@@ -1,0 +1,5 @@
+.event-created
+  %h5 イベントを投稿しました。
+  = link_to 'Twitterでシェア', "http://twitter.com/share?url=url/events/#{@event.id}&text=#{@event.title}", class: 'btn btn-twitter rounded-pill'
+  %a.twitter-share-button{href: "//twitter.com/share", "data-text" => "#{@event.title}", "data-url" => "/events/#{@event.id}"} ツイートする
+  = link_to '戻る', root_path, class: 'btn btn-light rounded-pill'

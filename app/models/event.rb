@@ -1,17 +1,18 @@
 class Event < ApplicationRecord
   belongs_to :user, foreign_key: "host_user_id"
+  has_many :event_tags, dependent: :destroy
+  has_many :tags, through: :event_tags
   validates :title, presence: true
   validates :date, presence: true
   validates :text, presence: true
   attr_writer :current_step
-  acts_as_taggable
 
   def current_step
     @current_step || steps.first
   end
 
   def steps
-    %w[first second confirmation]
+    %w[first confirmation]
   end
 
   def next_step
@@ -34,6 +35,21 @@ class Event < ApplicationRecord
     steps.all? do |step|
       self.current_step = step
       valid?
+    end
+  end
+
+  def save_tags(tags)
+    current_tags = self.tags.pluck(:name) unless self.tags.nil?
+    old_tags = current_tags - tags
+    new_tags = tags - current_tags
+
+    old_tags.each do |old_name|
+      self.tags.delete Tag.find_by(name: old_name)
+    end
+
+    new_tags.each do |new_name|
+      event_tag = Tag.find_or_create_by(name: new_name)
+      self.tags << event_tag
     end
   end
 end

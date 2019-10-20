@@ -36,9 +36,8 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 # Use Haml despite of ERB view files
 gem 'haml-rails'
-# Use acts-as-taggable-on for event tags
-gem 'acts-as-taggable-on'
 gem 'tag-it-rails'
+gem 'pry-rails'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
