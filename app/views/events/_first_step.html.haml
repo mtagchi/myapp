@@ -1,8 +1,8 @@
-.form-title
+.event-title
   %h2 イベント概要入力
   = link_to 'やめる', root_path, class: 'btn btn-link'
 
-.form-main
+.event-main
   .form-group
     = f.label :title, "タイトル"
     %span.form-require 必須
@@ -41,18 +41,22 @@
     %ul#event-tags
 
   .form-group
-    = f.label :restaurant_name, "レストラン名"
+    = f.label :restaurant_name, "会場"
     %br
     = f.text_field :restaurant_name, class: 'form-control'
 
   .form-group
-    = f.label :address, "場所"
+    = f.label :address, "場所(住所またはエリア)"
     %br
     = f.text_field :address, class: 'form-control'
 
   .form-group
-    = f.label :restaurant_url, "レストランURL(ホームページ、レビューサイトなど)"
+    = f.label :restaurant_url, "会場URL(ホームページ、レビューサイトなど)"
     %br
     = f.text_field :restaurant_url, class: 'form-control'
 
-  =f.submit "次へ", class: 'btn btn-primary rounded-pill'
+  .button-group
+    - if @event.new_record?
+      = f.submit "次へ", class: 'btn btn-twitter rounded-pill'
+    - else
+      = f.submit "送信", class: 'btn btn-twitter rounded-pill'

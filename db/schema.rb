@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_19_102226) do
+ActiveRecord::Schema.define(version: 2019_11_04_141734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.text "text", null: false
+    t.bigint "event_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_comments_on_event_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "event_tags", force: :cascade do |t|
     t.bigint "event_id"
@@ -41,6 +51,15 @@ ActiveRecord::Schema.define(version: 2019_10_19_102226) do
     t.index ["host_user_id"], name: "index_events_on_host_user_id"
   end
 
+  create_table "participants", force: :cascade do |t|
+    t.bigint "participant_user_id"
+    t.bigint "event_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_participants_on_event_id"
+    t.index ["participant_user_id"], name: "index_participants_on_participant_user_id"
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -64,4 +83,5 @@ ActiveRecord::Schema.define(version: 2019_10_19_102226) do
   end
 
   add_foreign_key "events", "users", column: "host_user_id"
+  add_foreign_key "participants", "users", column: "participant_user_id"
 end

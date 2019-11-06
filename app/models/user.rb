@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_many :events, foreign_key: "host_user_id", dependent: :destroy
+  has_many :participants, foreign_key: "application_user_id", dependent: :destroy
+  has_many :comments
   validates :name, presence: true
   validates :image, presence: true
   validates :username, presence: true, uniqueness: true

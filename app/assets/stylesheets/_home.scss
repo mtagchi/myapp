@@ -1,3 +1,40 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.main-visual {
+  background-image: url("https://ks-app-1.s3-ap-northeast-1.amazonaws.com/uploads/user/image/background/cheers_2.jpeg");
+  background-size: cover;
+  height: calc(100vh - 56px);
+  .main-explanation {
+    height: 100%;
+    padding: calc(50vh - 68px) 0;
+    text-align: center;
+    color: white;
+  }
+}
+
+.contents-home {
+  margin-top: 20px;
+  padding: 10px 20px;
+  .row {
+    .index-title {
+      width: 100%;
+      padding: 0 15px 10px;
+      display: flex;
+      h2 {
+        display: inline;
+      }
+      a {
+        margin: auto 0 auto auto;
+      }
+    }
+    .card {
+      position: relative;
+      a {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

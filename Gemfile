@@ -38,6 +38,7 @@ gem 'jquery-ui-rails'
 gem 'haml-rails'
 gem 'tag-it-rails'
 gem 'pry-rails'
+gem 'font-awesome-sass'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password

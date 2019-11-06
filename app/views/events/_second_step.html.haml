@@ -1,8 +1,8 @@
-.form-title
+.event-title
   %h2 イベント開催地
   = link_to 'やめる', root_path, class: 'btn btn-link'
 
-.form-main
+.event-main
   .form-group
     = f.label :restaurant_name, "レストラン名"
     %br
@@ -18,5 +18,6 @@
     %br
     = f.text_field :restaurant_url, class: 'form-control'
 
-  =f.submit "次へ", class: 'btn btn-primary'
-  =f.submit "戻る", name: 'back_button', class: 'btn btn-light rounded-pill'
+  .button-group
+    = f.submit "次へ", class: 'btn btn-twitter'
+    = f.submit "戻る", name: 'back_button', class: 'btn btn-secondary rounded-pill'

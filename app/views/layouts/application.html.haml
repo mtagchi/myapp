@@ -1,15 +1,14 @@
 !!!
 %html
   %head
-    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{ content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type" }/
     %title App
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    .wrap{style: "background-color: #f5f5f5;"}
-      = render 'layouts/header'
-      .contents
-        = yield
-      = render 'layouts/footer'
+    = render 'layouts/header'
+    .contents{ style: "position: relative; padding-top: 56px; background-color: #f5f5f5; padding-bottom: 20px;" }
+      = yield
+    = render 'layouts/footer'

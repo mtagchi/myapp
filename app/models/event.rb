@@ -1,7 +1,9 @@
 class Event < ApplicationRecord
   belongs_to :user, foreign_key: "host_user_id"
   has_many :event_tags, dependent: :destroy
+  has_many :participants, dependent: :destroy
   has_many :tags, through: :event_tags
+  has_many :comments
   validates :title, presence: true
   validates :date, presence: true
   validates :text, presence: true

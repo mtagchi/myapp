@@ -1,3 +1,5 @@
 %nav.navbar.footer
   .navbar-footer
-    %a.navbar.navbar-brand{href: "/"}App名
+    = link_to "/", class: 'navbar navbar-brand' do
+      = icon 'fas', 'wine-glass-alt', style: "margin: 0; width: 9px;"
+      Cheers-offline

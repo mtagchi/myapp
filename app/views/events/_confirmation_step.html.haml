@@ -1,27 +1,27 @@
-.form-title
+.event-title
   %h2 入力内容確認
   = link_to 'やめる', root_path, class: 'btn btn-link'
 
-.form-main
+.event-main
   %table.table.table-bordered
     %tbody
       %tr
-        %td= f.label :title, "タイトル"
+        %th= f.label :title, "タイトル"
         = f.hidden_field :title
         %td= @event.title
 
       %tr
-        %td= f.label :text, "説明"
+        %th= f.label :text, "説明"
         = f.hidden_field :text
         %td= @event.text
 
       %tr
-        %td= f.label :date, "日程"
+        %th= f.label :date, "日程"
         = f.hidden_field :date
         %td= @event.date
 
       %tr
-        %td= f.label "時間"
+        %th= f.label "時間"
         = f.hidden_field :start_time
         = f.hidden_field :end_time
         %td
@@ -36,7 +36,7 @@
             = @event.end_time.strftime("%H:%M")
 
       %tr
-        %td= f.label :no_of_participants, "参加可能人数"
+        %th= f.label :no_of_participants, "参加可能人数"
         = f.hidden_field :no_of_participants
         %td
           - if @event.no_of_participants == nil
@@ -46,18 +46,26 @@
             人
 
       %tr
-        %td= f.label :tag_list, "タグ"
+        %th= f.label :tag_list, "タグ"
         = f.hidden_field :tag_list, value: params[:tag_list]
         %td
-          - if params[:tag_list].empty?
-            なし
+          - if params[:tag_list]
+            - if params[:tag_list].empty?
+              なし
+            - else
+              - params[:tag_list].split(',').each do |tag|
+                %li.tag
+                  %span= tag
           - else
-            - params[:tag_list].split(',').each do |tag|
-              %li.tag-confirmation
-                %span= tag
+            - if params[:event][:tag_list].empty?
+              なし
+            - else
+              - params[:event][:tag_list].split(',').each do |tag|
+                %li.tag
+                  %span= tag
 
       %tr
-        %td= f.label :restaurant_name, "レストラン名"
+        %th= f.label :restaurant_name, "会場"
         = f.hidden_field :restaurant_name
         %td
           - if @event.restaurant_name.empty?
@@ -66,7 +74,7 @@
             = @event.restaurant_name
 
       %tr
-        %td= f.label :address, "場所"
+        %th= f.label :address, "場所"
         = f.hidden_field :address
         %td
           - if @event.address.empty?
@@ -75,7 +83,7 @@
             = @event.address
 
       %tr
-        %td= f.label :restaurant_url, "レストランURL"
+        %th= f.label :restaurant_url, "会場URL"
         = f.hidden_field :restaurant_url
         %td
           - if @event.restaurant_url.empty?
@@ -83,5 +91,6 @@
           - else
             = @event.restaurant_url
 
-  =f.submit "送信", class: 'btn btn-primary rounded-pill'
-  =f.submit "戻る", name: 'back_button', class: 'btn btn-light rounded-pill'
+  .button-group
+    = f.submit "送信", class: 'btn btn-twitter rounded-pill'
+    = f.submit "戻る", name: 'back_button', class: 'btn btn-secondary rounded-pill'

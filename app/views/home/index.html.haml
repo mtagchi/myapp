@@ -1,14 +1,49 @@
-%h1 Home#index
-%p Find me in app/views/home/index.html.erb
 - if user_signed_in?
   You are already signed in.
-  = @user.name
-  = @user.username
-  = @user.uid
-  = image_tag @user.image.url
-  = link_to "Twitter", "https://twitter.com/#{@user.username}"
+  = current_user.name
+  = current_user.username
+  = current_user.uid
+  = image_tag current_user.image.url
+  = link_to "Twitter", "https://twitter.com/#{current_user.username}"
   = link_to "Log out", destroy_user_session_path, method: :delete
   = link_to "New event", new_event_path
 - else
-  You are not signed in.
-  = link_to "Sign in with Twitter", user_twitter_omniauth_authorize_path
+  .main-visual
+    .main-explanation
+      %h1 Cheers-offline 
+      %h5 Twitterフォロワーと飲み会を開けるサービス
+  - unless @events.nil?
+    .contents-home
+      .row
+        .index-title
+          %h2 新着イベント
+          = link_to 'すべて表示', events_path
+        - @events.each do |event|
+          .col-sm-6.col-md-3
+            .card
+              = link_to '', "/events/#{event.id}" 
+              .card-body.px-2.py-3
+                %h5.card-title= event.title
+                %p.card-text
+                  = icon 'fas', 'calendar-alt', class: 'fa-fw'
+                  = event.date
+                  %br
+                  = icon 'fas', 'clock', class: 'fa-fw'
+                  - if event.start_time == nil && event.end_time == nil
+                    未定
+                  - elsif event.start_time != nil
+                    = event.start_time.strftime("%H:%M")
+                    〜
+                    = event.end_time.strftime("%H:%M") unless event.end_time == nil
+                  - else
+                    未定〜
+                    = event.end_time.strftime("%H:%M")
+                  %br
+                  = icon 'fas', 'map-marker-alt', class: 'fa-fw'
+                  - if event.address.present?
+                    = event.address
+                  - else
+                    未定
+                %h6.card-title
+                  = image_tag(event.user.image.url, class: 'twitter-icon')
+                  = event.user.name

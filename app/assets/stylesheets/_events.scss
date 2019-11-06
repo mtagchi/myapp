@@ -1,79 +1,152 @@
-li {
-  list-style: none;
-}
-
-.form-title {
+.contents-events {
+  width: 800px;
+  margin: 20px auto 0;
   padding: 10px;
-  margin-bottom: 10px;
-  display: flex;
-  .btn {
-    margin-left: auto;
-  }
-}
-
-.form-main {
-  width: 700px;
-  margin: auto;
-  .form-group {
-    .form-require {
-      border-radius: 6px;
-      background-color: red;
-      color: white;
-      font-size: 0.9rem;
-      padding: 2px 4px;
+  border: 1px solid #e4e7ec;
+  box-shadow: 0px 2px 5px 0px grey;
+  background-color: white;
+  .event-title {
+    margin-bottom: 10px;
+    display: flex;
+    .btn {
+      margin-left: auto;
     }
-    .form-no {
-      display: flex;
-      .unit {
-        padding: 6px 12px;
+  }
+
+  .event-main {
+    width: 700px;
+    margin: auto;
+    .main-group {
+      padding: 8px 0;
+      border-bottom: 1px solid $border;
+    }
+    .upper-info {
+      .flexed-info {
+        display: flex;
+        padding-bottom: 8px;
+        .info-left {
+          width: 50%;
+          padding-right: 15px;
+          border-right: 1px solid #e4e7ec;
+        }
+        .info-right {
+          width: 50%;
+          padding-left: 15px;
+        }
       }
     }
-    ul {
-      padding: 0;
+    .event-no_of_participants {
+      table.table {
+        width: 80%;
+        margin: auto;
+        td {
+          width: 10%;
+          a {
+            width: 100%;
+          }
+        }
+      }
     }
-    li.tagit-choice {
-      border-radius: 6px;
-      border: 1px solid #CAD8F3;
-      background: none;
-      background-color: #DEE7F8;
-      font-weight: normal;
-      padding: .2em .5em .2em .5em;
-      position: relative;
-      line-height: inherit;
-      color: #454545;
-      display: block;
-      float: left;
-      margin: 2px 5px 2px 0;
-      box-sizing: border-box;
+    .button-group {
+      padding: 8px 0;
+      text-align: center;
+      border-bottom: 1px solid $border;
+    }
+    .comment-group {
+      padding: 8px 0;
+      .comment {
+        border: 1px solid $border;
+        margin: 10px;
+        .comment-info {
+          display: flex;
+          .info-right {
+            margin: 0 10px 0 auto;
+          }
+        }
+        .text {
+          margin: 0 10px 10px;
+        }
+      }
+      .new_comment {
+        textarea {
+          width: calc(100% - 20px);
+          margin: 0 10px 0;
+        }
+        .submit {
+          text-align: center;
+        }
+      }
+    }
+    .form-group {
+      .form-require {
+        border-radius: 6px;
+        background-color: red;
+        color: white;
+        font-size: 0.9rem;
+        padding: 2px 4px;
+      }
+      .form-no {
+        display: flex;
+        .unit {
+          padding: 6px 12px;
+        }
+      }
+      ul {
+        padding: 0;
+      }
+      li.tagit-choice {
+        border-radius: 6px;
+        border: 1px solid #CAD8F3;
+        background: none;
+        background-color: #DEE7F8;
+        font-weight: normal;
+        padding: .2em .5em .2em .5em;
+        position: relative;
+        line-height: inherit;
+        color: #454545;
+        display: block;
+        float: left;
+        margin: 2px 5px 2px 0;
+        box-sizing: border-box;
+      }
+    }
+    table.table {
+      th {
+        width: 33%;
+      }
     }
   }
-  table.table {
-    td {
-      width: 1/3;
-    }
-    li.tag-confirmation {
-      border-radius: 6px;
-      border: 1px solid #CAD8F3;
-      background: none;
-      background-color: #DEE7F8;
-      font-weight: normal;
-      padding: .2em .5em .2em .5em;
-      position: relative;
-      line-height: inherit;
-      color: #454545;
-      display: block;
-      float: left;
-      margin: 2px 5px 2px 0;
-      box-sizing: border-box;
+
+  .event-created {
+    padding: 10px;
+    .btn-twitter {
+      background-color: $twitter;
+      color: white;
+      font-weight: 500;
     }
   }
 }
 
-.event-created {
-  padding: 10px;
-  .btn-twitter {
-    background-color: $twitter;
-    color: white;
-    font-weight: 500;
-  }
+.ui-helper-hidden-accessible {
+  display: none;
+}
+
+i {
+  color: $twitter;
+  margin-right: 10px;
+}
+
+li.tag {
+  border-radius: 6px;
+  border: 1px solid #CAD8F3;
+  background: none;
+  background-color: #DEE7F8;
+  font-weight: normal;
+  padding: .2em .5em .2em .5em;
+  position: relative;
+  color: #454545;
+  display: block;
+  display: inline-block;
+  margin: 2px 5px 2px 0;
+  box-sizing: border-box;
 }

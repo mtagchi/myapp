@@ -1,33 +1,29 @@
 nav.header {
   background-color: $header;
+  box-shadow: 0 1px 6px 0 $header;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
   .navbar-header {
     width: 800px;
     margin: 0 auto;
     display: flex;
-    .navbar-left {
+    .header-left {
       margin-right: auto;
+      a {
+        padding-left: 0;
+      }
     }
-    .navbar-right {
+    .header-right {
       margin-left: auto;
       .btn-group {
         #dropdownMenuButton {
           padding: 0;
           margin-left: 30px;
-          img {
-            height: 38px;
-            width: 38px;
-            padding: 0;
-            border-radius: 50%;
-          }
         }
         .dropdown-menu {
           margin-top: 8px;
         }
-      }
-      .btn-twitter {
-        background-color: $twitter;
-        color: white;
-        font-weight: 500;
       }
     }
   }
@@ -42,4 +38,17 @@ nav.footer {
       color: $header;
     }
   }
+}
+
+.btn-twitter {
+  background-color: $twitter;
+  color: white;
+  font-weight: 500;
+}
+
+img.twitter-icon {
+  height: 38px;
+  width: 38px;
+  padding: 0;
+  border-radius: 50%;
 }
