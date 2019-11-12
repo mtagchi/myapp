@@ -1,6 +1,7 @@
 .contents-events
   .event-title
     %h1= @event.title
+
   .event-main
     .main-group.upper-info
       .flexed-info
@@ -11,6 +12,12 @@
           = link_to "https://twitter.com/#{@host_user.username}", target: :_blank, class: 'btn btn-icon' do
             = icon 'fab', 'twitter-square', class: 'fa-2x'
         .info-right
+          .event-no_of_participants
+            = icon 'fas', 'user-friends'
+            - if @event.no_of_participants.present?
+              #{@event.participants.length}/#{@event.no_of_participants}人
+            - else
+              #{@event.participants.length}人
           .event-date
             = icon 'fas', 'calendar-alt'
             = @event.date
@@ -25,11 +32,6 @@
             - else
               未定〜
               = @event.end_time.strftime("%H:%M")
-          .event-no_of_participants
-            - if @event.no_of_participants.present?
-              参加人数  #{@event.participants.length}/#{@event.no_of_participants}人
-            - else
-              参加人数  #{@event.participants.length}人
       .event-tags
         - if @event.tags
           - @event.tags.each do |tag|
@@ -70,14 +72,12 @@
     .button-group
       - if user_signed_in?
         - if @event.host_user_id == current_user.id
-          = link_to '編集', edit_event_path, class: 'btn btn-twitter rounded-pill'
+          = link_to '編集', edit_event_path, class: 'btn btn-primary btn-twitter rounded-pill'
           %button.btn.btn-danger.rounded-pill{ type: "button", "data-toggle" => "modal", "data-target" => "#deleteModal" } 削除
         - elsif @participants.pluck(:participant_user_id).include?(current_user.id)
           %button.btn.btn-danger.rounded-pill{ type: "button", "data-toggle" => "modal", "data-target" => "#cancelModal" } キャンセル
         - else
-          %button.btn.btn-twitter.rounded-pill{ type: "button", "data-toggle" => "modal", "data-target" => "#participateModal" } 参加する
-      -# - else
-      -#   = link_to 'Twitterで登録/ログイン', user_twitter_omniauth_authorize_path, class: 'btn btn-twitter rounded-pill', role: "button"
+          %button.btn.btn-primary.btn-twitter.rounded-pill{ type: "button", "data-toggle" => "modal", "data-target" => "#participateModal" } 参加する
 
     .modal.fade#deleteModal{ tabindex: "-1", role: "dialog", "aria-labelledby" => "deleteModalLabel" }
       .modal-dialog{ role: "document" }
@@ -116,7 +116,7 @@
             %p= "「#{@event.title}」に参加しますか？"
           .modal-footer
             %button.btn.btn-secondary.rounded-pill{ type: "button", "data-dismiss" => "modal" } やめる
-            = link_to '参加する', "/events/#{@event.id}/participate", method: :post, class: 'btn btn-twitter rounded-pill'
+            = link_to '参加する', "/events/#{@event.id}/participate", method: :post, class: 'btn btn-primary btn-twitter rounded-pill'
 
     .comment-group
       %h4 コメント
@@ -149,11 +149,10 @@
                         = link_to '削除', [@event, comment], method: :delete, class: 'btn btn-danger rounded-pill'
 
           .text= comment.text
+
       .new_comment
         - if user_signed_in?
-          -# = form_with(event_comments_path, local: true) do |f|
-          = form_for [@event, @comment] do |f|
+          = form_with(url: "/events/#{@event.id}/comments", local: true) do |f|
             コメントを投稿
             = f.text_area :text
-            = f.hidden_field :event_id, value: @event.id
-            .submit= f.submit "送信", class: 'btn btn-twitter rounded-pill'
+            .submit= f.submit "送信", class: 'btn btn-primary btn-twitter rounded-pill'

@@ -35,7 +35,7 @@ class Event < ApplicationRecord
 
   def all_valid?
     steps.all? do |step|
-      self.current_step = step
+      current_step = step
       valid?
     end
   end

@@ -3,6 +3,7 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy, :participate, :cancel]
 
   def index
+    @events = Event.order('date DESC').paginate(page: params[:page], per_page: 20)
   end
 
   def show
