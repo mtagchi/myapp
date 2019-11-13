@@ -23,7 +23,7 @@
             .card
               = link_to '', "/events/#{event.id}" 
               .card-body.px-2.py-3
-                %h5.card-title= event.title
+                %h5.card-title= event.title.truncate(15)
                 %p.card-text
                   = icon 'fas', 'calendar-alt', class: 'fa-fw'
                   = event.date
@@ -41,7 +41,7 @@
                   %br
                   = icon 'fas', 'map-marker-alt', class: 'fa-fw'
                   - if event.address.present?
-                    = event.address
+                    = event.address.truncate(15)
                   - else
                     未定
                 %h6.card-title
