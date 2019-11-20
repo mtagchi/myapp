@@ -91,8 +91,10 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    @event.destroy
-    redirect_to root_path
+    if @event.host_user_id == current_user.id
+      @event.destroy
+      redirect_to root_path
+    end
   end
 
   def participate

@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_many :events, foreign_key: "host_user_id", dependent: :destroy
-  has_many :participants, foreign_key: "application_user_id", dependent: :destroy
-  has_many :comments
+  has_many :participants, foreign_key: "participant_user_id", dependent: :destroy
+  has_many :comments, dependent: :destroy
   validates :name, presence: true
   validates :image, presence: true
   validates :username, presence: true, uniqueness: true
@@ -20,7 +20,7 @@ class User < ApplicationRecord
         remote_image_url: auth.info.image
         )
     end
-    return user
+    user
   end
 
   private

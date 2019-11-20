@@ -1,12 +1,110 @@
 - if user_signed_in?
-  You are already signed in.
-  = current_user.name
-  = current_user.username
-  = current_user.uid
-  = image_tag current_user.image.url
-  = link_to "Twitter", "https://twitter.com/#{current_user.username}"
-  = link_to "Log out", destroy_user_session_path, method: :delete
-  = link_to "New event", new_event_path
+  .contents
+    .contents-title
+      %h2 参加イベント
+      - if @participations.length != 0
+        .right= link_to 'イベント一覧へ', events_path
+    .contents-main
+      %ul
+        - if @participations.length == 0
+          参加イベントはありません。
+          %br
+          イベントに参加してみましょう！
+          = link_to 'イベント一覧へ', events_path
+        - @participations.each do |participate|
+          %li.main-group.list
+            .left
+              %span= participate.event.date.strftime("%Y")
+              %h3= participate.event.date.strftime("%m/%d")
+            .center
+              %h5= link_to participate.event.title.truncate(30), participate.event
+              %span
+                = icon 'fas', 'user-friends'
+                - if participate.event.no_of_participants.present?
+                  #{participate.event.participants.length}/#{participate.event.no_of_participants}人
+                - else
+                  #{participate.event.participants.length}人
+              %span
+                = icon 'fas', 'clock'
+                - if participate.event.start_time == nil && participate.event.end_time == nil
+                  未定
+                - elsif participate.event.start_time != nil
+                  = participate.event.start_time.strftime("%H:%M")
+                  〜
+                  = participate.event.end_time.strftime("%H:%M") unless participate.event.end_time == nil
+                - else
+                  未定〜
+                  = participate.event.end_time.strftime("%H:%M")
+              %span
+                = icon 'fas', 'map-marker-alt'
+                - if participate.event.address.present?
+                  = participate.event.address.truncate(15)
+                - else
+                  未定
+            .right
+              = link_to image_tag(participate.event.user.image.url, class: 'twitter-icon'), participate.event.user, class: 'btn btn-icon'
+      = will_paginate @participations, class: "pagination justify-content-center", previous_label: ' &lt 前へ', next_label: '次へ &gt', inner_window: 1, outer_window: 0, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer
+
+    .contents-title
+      %h2 主催イベント
+    .contents-main
+      %ul
+        - if @host_events.length == 0
+          主催イベントはありません。
+          %br
+          epuloでイベントを開催してみませんか？
+          .btn-center= link_to 'イベントを開催する', new_event_path, class: 'btn btn-primary btn-twitter rounded-pill'
+        - @host_events.each do |event|
+          %li.main-group.list
+            .left
+              %span= event.date.strftime("%Y")
+              %h3= event.date.strftime("%m/%d")
+            .center
+              %h5= link_to event.title.truncate(30), event
+              %span
+                = icon 'fas', 'user-friends'
+                - if event.no_of_participants.present?
+                  #{event.participants.length}/#{event.no_of_participants}人
+                - else
+                  #{event.participants.length}人
+              %span
+                = icon 'fas', 'clock'
+                - if event.start_time == nil && event.end_time == nil
+                  未定
+                - elsif event.start_time != nil
+                  = event.start_time.strftime("%H:%M")
+                  〜
+                  = event.end_time.strftime("%H:%M") unless event.end_time == nil
+                - else
+                  未定〜
+                  = event.end_time.strftime("%H:%M")
+              %span
+                = icon 'fas', 'map-marker-alt'
+                - if event.address.present?
+                  = event.address.truncate(15)
+                - else
+                  未定
+      = will_paginate @host_events, param_name: 'host_page', class: "pagination justify-content-center", previous_label: ' &lt 前へ', next_label: '次へ &gt', inner_window: 1, outer_window: 0, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer
+
+    .contents-title
+      %h5 アカウント
+    .contents-main
+      .btn-center
+        %button.btn.btn-danger.rounded-pill{ type: "button", "data-toggle" => "modal", "data-target" => "#deleteAccountModal" } アカウントを削除
+
+    .modal.fade#deleteAccountModal{ tabindex: "-1", role: "dialog", "aria-labelledby" => "deleteAccountModalLabel" }
+      .modal-dialog{ role: "document" }
+        .modal-content
+          .modal-header
+            %h5.modal-title 確認
+            %button.close{ type: "button", "data-dismiss" => "modal", "aria-label" => "閉じる" }
+              %span{ "aria-hidden" => "true" } &times;
+          .modal-body
+            %p アカウントを削除してよろしいですか？
+          .modal-footer
+            %button.btn.btn-secondary.rounded-pill{ type: "button", "data-dismiss" => "modal" } やめる
+            = link_to '削除', "users", method: :delete, class: 'btn btn-danger rounded-pill'
+
 - else
   .main-visual
     .main-explanation
@@ -23,8 +121,8 @@
             .card
               = link_to '', "/events/#{event.id}" 
               .card-body.px-2.py-3
-                %h5.card-title= event.title.truncate(15)
-                %p.card-text
+                %h5.card-title.unbroken= event.title.truncate(15)
+                %p.card-text.unbroken
                   = icon 'fas', 'calendar-alt', class: 'fa-fw'
                   = event.date
                   %br

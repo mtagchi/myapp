@@ -8,8 +8,10 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    @comment.destroy
-    redirect_to event_path(params[:event_id])
+    if @comment.user_id == current_user.id
+      @comment.destroy
+      redirect_to event_path(params[:event_id])
+    end
   end
 
   private

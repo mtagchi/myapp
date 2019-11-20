@@ -1,5 +1,10 @@
 class HomeController < ApplicationController
   def index
-    @events = Event.limit(4).order('created_at DESC')
+    @events = Event.limit(4).order('date DESC')
+    if user_signed_in?
+      @user = User.find(current_user.id)
+      @participations = Participant.where(participant_user_id: @user.id).order('created_at DESC').paginate(page: params[:page], per_page: 5)
+      @host_events = Event.where(host_user_id: @user.id).order('date DESC').paginate(page: params[:host_page], per_page: 5)
+    end
   end
 end

@@ -12,4 +12,4 @@
             = link_to 'マイページ', "/", class: 'dropdown-item'
             = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "dropdown-item"
       - else
-        = link_to 'Twitterで登録/ログイン', user_twitter_omniauth_authorize_path, class: 'btn btn-primary btn-primary btn-twitter rounded-pill', role: "button"
+        = link_to 'Twitterで登録/ログイン', user_twitter_omniauth_authorize_path, class: 'btn btn-primary btn-twitter rounded-pill', role: "button"

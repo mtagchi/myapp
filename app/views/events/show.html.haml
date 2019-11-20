@@ -1,8 +1,8 @@
-.contents-events
-  .event-title
+.contents
+  .contents-title
     %h1= @event.title
 
-  .event-main
+  .contents-main
     .main-group.upper-info
       .flexed-info
         .info-left
@@ -78,6 +78,8 @@
           %button.btn.btn-danger.rounded-pill{ type: "button", "data-toggle" => "modal", "data-target" => "#cancelModal" } キャンセル
         - else
           %button.btn.btn-primary.btn-twitter.rounded-pill{ type: "button", "data-toggle" => "modal", "data-target" => "#participateModal" } 参加する
+      - else
+        = link_to 'Twitterで登録/ログイン', user_twitter_omniauth_authorize_path, class: 'btn btn-primary btn-twitter rounded-pill', role: "button"
 
     .modal.fade#deleteModal{ tabindex: "-1", role: "dialog", "aria-labelledby" => "deleteModalLabel" }
       .modal-dialog{ role: "document" }
@@ -120,6 +122,8 @@
 
     .comment-group
       %h4 コメント
+      - if @comments.length == 0
+        コメントはまだありません。
       - @comments.each do |comment|
         .comment
           .comment-info
@@ -155,4 +159,4 @@
           = form_with(url: "/events/#{@event.id}/comments", local: true) do |f|
             コメントを投稿
             = f.text_area :text
-            .submit= f.submit "送信", class: 'btn btn-primary btn-twitter rounded-pill'
+            .btn-center= f.submit "送信", class: 'btn btn-primary btn-twitter rounded-pill'
