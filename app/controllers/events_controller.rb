@@ -22,12 +22,8 @@ class EventsController < ApplicationController
     @event = current_user.events.build(event_params)
     @event.current_step = session[:event_step]
     if @event.first_step?
-      if event_params["start_time(4i)"].blank?
-        @event.start_time = nil
-      end
-      if event_params["end_time(4i)"].blank?
-        @event.end_time = nil
-      end
+      @event.start_time = nil if event_params["start_time(4i)"].blank?
+      @event.end_time = nil if event_params["end_time(4i)"].blank?
     end
     if @event.valid?
       if params[:back_button]
@@ -58,34 +54,15 @@ class EventsController < ApplicationController
 
   def update
     if @event.host_user_id == current_user.id
-      @event.current_step = session[:event_step]
-      if @event.first_step?
-        if event_params["start_time(4i)"].blank?
-          @event.start_time = nil
-        end
-        if event_params["end_time(4i)"].blank?
-          @event.end_time = nil
-        end
-      end
+      @event.start_time = nil if event_params["start_time(4i)"].blank?
+      @event.end_time = nil if event_params["end_time(4i)"].blank?
       if @event.valid?
-        if params[:back_button]
-          @event.previous_step
-        elsif @event.last_step?
-          if event_params[:tag_list]
-            tag_list = event_params[:tag_list].split(',')
-          else
-            tag_list = params[:tag_list].split(',')
-          end
-          @event.update(event_params) && @event.save_tags(tag_list) if @event.all_valid?
+        if event_params[:tag_list]
+          tag_list = event_params[:tag_list].split(',')
         else
-          @event.next_step
+          tag_list = params[:tag_list].split(',')
         end
-        session[:event_step] = @event.current_step
-      end
-      if @event.first_step?
-        render :edit
-      else
-        session[:event_step] = nil
+        @event.update(event_params) && @event.save_tags(tag_list)
       end
     end
   end

@@ -1,5 +1,5 @@
-.
+.contents
   .event-created
     %h5 イベントを更新しました。
-    = link_to 'ツイートする', "http://twitter.com/intent/tweet?text=#{@event.title}&url=https://epulo.herokuapp.com/events/#{@event.id}", class: 'btn btn-primary btn-twitter rounded-pill twitter-share-button', target: :_blank
+    = link_to 'ツイートする', "http://twitter.com/intent/tweet?text=#{@event.title}&url=https://epulo.herokuapp.com/events/#{@event.id}", class: 'btn btn-twitter rounded-pill twitter-share-button', target: :_blank
     = link_to '戻る', @event, class: 'btn btn-secondary rounded-pill'
