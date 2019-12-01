@@ -110,7 +110,7 @@
     .main-explanation
       %h1 epulo 
       %h5 Twitterフォロワーと飲み会を開けるサービス
-  - unless @events.nil?
+  - if @events.length != 0
     .contents-home
       .row
         .index-title
