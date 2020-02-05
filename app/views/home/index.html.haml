@@ -19,13 +19,14 @@
             .center
               %h5= link_to participate.event.title.truncate(30), participate.event
               %span
-                = icon 'fas', 'user-friends'
+                = icon 'fas', 'user-friends', class: 'fa-fw'
                 - if participate.event.no_of_participants.present?
                   #{participate.event.participants.length}/#{participate.event.no_of_participants}人
                 - else
                   #{participate.event.participants.length}人
+              %br
               %span
-                = icon 'fas', 'clock'
+                = icon 'fas', 'clock', class: 'fa-fw'
                 - if participate.event.start_time == nil && participate.event.end_time == nil
                   未定
                 - elsif participate.event.start_time != nil
@@ -35,8 +36,9 @@
                 - else
                   未定〜
                   = participate.event.end_time.strftime("%H:%M")
+              %br
               %span
-                = icon 'fas', 'map-marker-alt'
+                = icon 'fas', 'map-marker-alt', class: 'fa-fw'
                 - if participate.event.address.present?
                   = participate.event.address.truncate(15)
                 - else
@@ -62,13 +64,14 @@
             .center
               %h5= link_to event.title.truncate(30), event
               %span
-                = icon 'fas', 'user-friends'
+                = icon 'fas', 'user-friends', class: 'fa-fw'
                 - if event.no_of_participants.present?
                   #{event.participants.length}/#{event.no_of_participants}人
                 - else
                   #{event.participants.length}人
+              %br
               %span
-                = icon 'fas', 'clock'
+                = icon 'fas', 'clock', class: 'fa-fw'
                 - if event.start_time == nil && event.end_time == nil
                   未定
                 - elsif event.start_time != nil
@@ -78,8 +81,9 @@
                 - else
                   未定〜
                   = event.end_time.strftime("%H:%M")
+              %br
               %span
-                = icon 'fas', 'map-marker-alt'
+                = icon 'fas', 'map-marker-alt', class: 'fa-fw'
                 - if event.address.present?
                   = event.address.truncate(15)
                 - else
@@ -106,10 +110,12 @@
             = link_to '削除', "users", method: :delete, class: 'btn btn-danger rounded-pill'
 
 - else
-  .main-visual
+  .container-fluid
     .main-explanation
       %h1 epulo 
-      %h5 Twitterフォロワーと飲み会を開けるサービス
+      %h5 Twitterフォロワーと
+      %h5 飲み会を開けるサービス
+      = link_to 'Twitterで登録/ログイン', user_twitter_omniauth_authorize_path, class: 'btn btn-twitter rounded-pill', role: "button"
   - if @events.length != 0
     .contents-home
       .row

@@ -1,5 +1,5 @@
 .contents {
-  width: 800px;
+  max-width: 800px;
   margin: 20px auto 0;
   padding: 10px;
   border: 1px solid #e4e7ec;
@@ -13,6 +13,7 @@
   .contents-main {
     width: 700px;
     margin: auto;
+    max-width: 100%;
     .main-group {
       padding: 8px 0;
       border-bottom: 1px solid $border;
@@ -20,7 +21,7 @@
     li.list {
       display: flex;
       .left {
-        width: 75px;
+        min-width: 80px;
       }
     }
     .upper-info {
