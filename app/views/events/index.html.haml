@@ -10,6 +10,7 @@
           .left
             %span= event.date.strftime("%Y")
             %h3= event.date.strftime("%m/%d")
+            %h5= event.date.strftime("(#{%w(日 月 火 水 木 金 土)[event.date.wday]})")
           .center
             %h5= link_to event.title.truncate(30), event
             %span
