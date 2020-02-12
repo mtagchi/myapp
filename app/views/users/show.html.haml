@@ -84,3 +84,22 @@
               - else
                 未定
     = will_paginate @host_events, param_name: 'host_page', class: "pagination justify-content-center", previous_label: ' &lt 前へ', next_label: '次へ &gt', inner_window: 1, outer_window: 0, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer
+
+    - if @user == current_user
+      %ul
+        %h4 アカウント
+        .btn-center
+          %button.btn.btn-danger.rounded-pill{ type: "button", "data-toggle" => "modal", "data-target" => "#deleteAccountModal" } アカウントを削除
+
+      .modal.fade#deleteAccountModal{ tabindex: "-1", role: "dialog", "aria-labelledby" => "deleteAccountModalLabel" }
+        .modal-dialog{ role: "document" }
+          .modal-content
+            .modal-header
+              %h5.modal-title 確認
+              %button.close{ type: "button", "data-dismiss" => "modal", "aria-label" => "閉じる" }
+                %span{ "aria-hidden" => "true" } &times;
+            .modal-body
+              %p アカウントを削除してよろしいですか？
+            .modal-footer
+              %button.btn.btn-secondary.rounded-pill{ type: "button", "data-dismiss" => "modal" } やめる
+              = link_to '削除', "/users", method: :delete, class: 'btn btn-danger rounded-pill'

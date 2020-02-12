@@ -1,5 +1,6 @@
 .contents
-  .event-created
+  .contents-main
     %h5 イベントを投稿しました。
-    = link_to 'ツイートする', "http://twitter.com/intent/tweet?text=#{@event.title}&url=https://epulo.herokuapp.com/events/#{@event.id}", class: 'btn btn-twitter rounded-pill twitter-share-button', target: :_blank
-    = link_to 'イベントページへ', @event, class: 'btn btn-secondary rounded-pill'
+    .button-group
+      = link_to 'ツイートする', "http://twitter.com/intent/tweet?text=#{@event.title}&url=https://epulo.herokuapp.com/events/#{@event.id}", class: 'btn btn-twitter rounded-pill twitter-share-button', target: :_blank
+      = link_to 'イベントページへ', @event, class: 'btn btn-secondary rounded-pill'

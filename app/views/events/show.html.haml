@@ -8,7 +8,7 @@
         .info-left
           %h5 主催者
           = link_to image_tag(@host_user.image.url, class: 'twitter-icon'), @host_user, class: 'btn btn-icon'
-          = @host_user.name
+          %div= @host_user.name
           = link_to "https://twitter.com/#{@host_user.username}", target: :_blank, class: 'btn btn-icon' do
             = icon 'fab', 'twitter-square', class: 'fa-2x'
         .info-right
@@ -64,7 +64,7 @@
             %tr
               %th
                 = link_to image_tag(@user.image.url, class: 'twitter-icon'), @user, class: 'btn btn-icon'
-                = @user.name
+                %div= @user.name
               %td
                 = link_to "https://twitter.com/#{@user.username}", target: :_blank, class: 'btn btn-icon' do
                   = icon 'fab', 'twitter-square', class: 'fa-2x'
@@ -159,4 +159,5 @@
           = form_with(url: "/events/#{@event.id}/comments", local: true) do |f|
             コメントを投稿
             = f.text_area :text
-            .btn-center= f.submit "送信", class: 'btn btn-twitter rounded-pill'
+            .button-group
+              = f.submit "送信", class: 'btn btn-twitter rounded-pill'

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  get '/mypage', to: 'home#index'
-  root to: 'events#index'
+  root to: 'home#index'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   resources :users, only: [:show, :destroy]
   resources :events do
