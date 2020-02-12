@@ -9,6 +9,7 @@
         参加イベントはありません。
       - @participations.each do |participate|
         %li.main-group.list
+          = link_to '', "events/#{participate.event.id}", class: 'card-link'
           .left
             %span= participate.event.date.strftime("%Y")
             %h3= participate.event.date.strftime("%m/%d")
@@ -20,6 +21,7 @@
                 #{participate.event.participants.length}/#{participate.event.no_of_participants}人
               - else
                 #{participate.event.participants.length}人
+            %br
             %span
               = icon 'fas', 'clock'
               - if participate.event.start_time == nil && participate.event.end_time == nil
@@ -31,6 +33,7 @@
               - else
                 未定〜
                 = participate.event.end_time.strftime("%H:%M")
+            %br
             %span
               = icon 'fas', 'map-marker-alt'
               - if participate.event.address.present?
@@ -47,6 +50,7 @@
         主催イベントはありません。
       - @host_events.each do |event|
         %li.main-group.list
+          = link_to '', "events/#{event.id}", class: 'card-link'
           .left
             %span= event.date.strftime("%Y")
             %h3= event.date.strftime("%m/%d")
@@ -58,6 +62,7 @@
                 #{event.participants.length}/#{event.no_of_participants}人
               - else
                 #{event.participants.length}人
+            %br
             %span
               = icon 'fas', 'clock'
               - if event.start_time == nil && event.end_time == nil
@@ -69,6 +74,7 @@
               - else
                 未定〜
                 = event.end_time.strftime("%H:%M")
+            %br
             %span
               = icon 'fas', 'map-marker-alt'
               - if event.address.present?
