@@ -9,7 +9,7 @@
         参加イベントはありません。
       - @participations.each do |participate|
         %li.main-group.list
-          = link_to '', "events/#{participate.event.id}", class: 'card-link'
+          = link_to '', "/events/#{participate.event.id}", class: 'card-link'
           .left
             %span= participate.event.date.strftime("%Y")
             %h3= participate.event.date.strftime("%m/%d")
@@ -51,7 +51,7 @@
         主催イベントはありません。
       - @host_events.each do |event|
         %li.main-group.list
-          = link_to '', "events/#{event.id}", class: 'card-link'
+          = link_to '', "/events/#{event.id}", class: 'card-link'
           .left
             %span= event.date.strftime("%Y")
             %h3= event.date.strftime("%m/%d")

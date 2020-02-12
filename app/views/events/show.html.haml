@@ -20,7 +20,7 @@
               #{@event.participants.length}人
           .event-date
             = icon 'fas', 'calendar-alt', class: 'fa-fw'
-            = @event.date
+            = @event.date.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[@event.date.wday]})")
           .event-time
             = icon 'fas', 'clock', class: 'fa-fw'
             - if @event.start_time == nil && @event.end_time == nil
