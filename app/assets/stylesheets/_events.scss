@@ -20,6 +20,15 @@
     }
     li.list {
       display: flex;
+      position: relative;
+      .card-link {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
       .left {
         min-width: 80px;
       }

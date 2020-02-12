@@ -13,6 +13,7 @@
           = link_to 'イベント一覧へ', events_path
         - @participations.each do |participate|
           %li.main-group.list
+            = link_to '', "events/#{participate.event.id}", class: 'card-link'
             .left
               %span= participate.event.date.strftime("%Y")
               %h3= participate.event.date.strftime("%m/%d")
@@ -58,6 +59,7 @@
           .btn-center= link_to 'イベントを開催する', new_event_path, class: 'btn btn-twitter rounded-pill'
         - @host_events.each do |event|
           %li.main-group.list
+            = link_to '', "events/#{event.id}", class: 'card-link'
             .left
               %span= event.date.strftime("%Y")
               %h3= event.date.strftime("%m/%d")

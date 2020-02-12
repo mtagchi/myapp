@@ -6,6 +6,7 @@
     %ul.events
       - @events.each do |event|
         %li.main-group.list
+          = link_to '', "events/#{event.id}", class: 'card-link'
           .left
             %span= event.date.strftime("%Y")
             %h3= event.date.strftime("%m/%d")
