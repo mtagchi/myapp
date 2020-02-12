@@ -57,7 +57,7 @@
           主催イベントはありません。
           %br
           epuloでイベントを開催してみませんか？
-          .btn-center= link_to 'イベントを開催する', new_event_path, class: 'btn btn-twitter rounded-pill'
+          .button-group= link_to 'イベントを開催する', new_event_path, class: 'btn btn-twitter rounded-pill'
         - @host_events.each do |event|
           %li.main-group.list
             = link_to '', "events/#{event.id}", class: 'card-link'
