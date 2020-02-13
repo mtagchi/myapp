@@ -15,7 +15,7 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
-    @event.current_step = @event.steps.first
+    @event.current_step = session[:event_step] = @event.steps.first
   end
 
   def create
