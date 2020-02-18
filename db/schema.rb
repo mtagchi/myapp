@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_04_141734) do
+ActiveRecord::Schema.define(version: 2020_02_17_145620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,25 @@ ActiveRecord::Schema.define(version: 2019_11_04_141734) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_comments_on_event_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "datetime_options", force: :cascade do |t|
+    t.date "date", null: false
+    t.time "start_time"
+    t.time "end_time"
+    t.bigint "event_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_datetime_options_on_event_id"
+  end
+
+  create_table "datetime_votes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "option_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["option_id"], name: "index_datetime_votes_on_option_id"
+    t.index ["user_id"], name: "index_datetime_votes_on_user_id"
   end
 
   create_table "event_tags", force: :cascade do |t|
@@ -82,6 +101,7 @@ ActiveRecord::Schema.define(version: 2019_11_04_141734) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "datetime_votes", "datetime_options", column: "option_id"
   add_foreign_key "events", "users", column: "host_user_id"
   add_foreign_key "participants", "users", column: "participant_user_id"
 end
