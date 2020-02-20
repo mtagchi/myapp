@@ -4,7 +4,7 @@
     %h5 Twitterフォロワーと
     %h5 飲み会を開けるサービス
     - if user_signed_in?
-      = link_to 'イベントを開催する', new_event_path, class: 'btn btn-twitter rounded-pill'
+      = link_to 'イベントを開催する', new_event_path, class: 'btn btn-twitter rounded-pill', role: "button"
     - else
       = link_to 'Twitterで登録/ログイン', user_twitter_omniauth_authorize_path, class: 'btn btn-twitter rounded-pill', role: "button"
 - if @events.length != 0
