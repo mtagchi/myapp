@@ -88,7 +88,7 @@
     - if @user == current_user
       %ul
         %h4 アカウント
-        .btn-center
+        .button-group
           %button.btn.btn-danger.rounded-pill{ type: "button", "data-toggle" => "modal", "data-target" => "#deleteAccountModal" } アカウントを削除
 
       .modal.fade#deleteAccountModal{ tabindex: "-1", role: "dialog", "aria-labelledby" => "deleteAccountModalLabel" }
