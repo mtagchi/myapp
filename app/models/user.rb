@@ -12,15 +12,13 @@ class User < ApplicationRecord
 
   def self.find_for_oauth(auth)
     user = User.find_or_initialize_by(uid: auth.uid, provider: auth.provider)
-    if user.new_record?
-      user.update_attributes(
-        email: User.dummy_email(auth),
-        password: Devise.friendly_token[0, 20],
-        name: auth.info.name,
-        username: auth.info.nickname,
-        remote_image_url: auth.info.image
-        )
-    end
+    user.update_attributes(
+      email: User.dummy_email(auth),
+      password: Devise.friendly_token[0, 20],
+      name: auth.info.name,
+      username: auth.info.nickname,
+      remote_image_url: auth.info.image
+      )
     user
   end
 
