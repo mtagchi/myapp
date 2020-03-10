@@ -20,19 +20,22 @@
             .card-body.px-2.py-3
               %h5.card-title.unbroken= event.title.truncate(15)
               %p.card-text.unbroken
-                = icon 'fas', 'calendar-alt', class: 'fa-fw'
-                = event.date
-                %br
-                = icon 'fas', 'clock', class: 'fa-fw'
-                - if event.start_time == nil && event.end_time == nil
-                  未定
-                - elsif event.start_time != nil
-                  = event.start_time.strftime("%H:%M")
-                  〜
-                  = event.end_time.strftime("%H:%M") unless event.end_time == nil
+                - if event.datetime_options.length == 1
+                  = icon 'fas', 'calendar-alt', class: 'fa-fw'
+                  = event.datetime_options[0].date
+                  %br
+                  = icon 'fas', 'clock', class: 'fa-fw'
+                  - if event.datetime_options[0].start_time == nil && event.datetime_options[0].end_time == nil
+                    未定
+                  - elsif event.datetime_options[0].start_time != nil
+                    = event.datetime_options[0].start_time.strftime("%H:%M")
+                    〜
+                    = event.datetime_options[0].end_time.strftime("%H:%M") unless event.datetime_options[0].end_time == nil
+                  - else
+                    未定〜
+                    = event.datetime_options[0].end_time.strftime("%H:%M")
                 - else
-                  未定〜
-                  = event.end_time.strftime("%H:%M")
+                  開催日時投票中！
                 %br
                 = icon 'fas', 'map-marker-alt', class: 'fa-fw'
                 - if event.address.present?

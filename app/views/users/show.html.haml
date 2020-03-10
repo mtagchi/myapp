@@ -11,9 +11,14 @@
         %li.main-group.list
           = link_to '', "/events/#{participate.event.id}", class: 'card-link'
           .left
-            %span= participate.event.date.strftime("%Y")
-            %h3= participate.event.date.strftime("%m/%d")
-            %h5= participate.event.date.strftime("(#{%w(日 月 火 水 木 金 土)[participate.event.date.wday]})")
+            - if participate.event.datetime_options.length == 1
+              %span= participate.event.datetime_options[0].date.strftime("%Y")
+              %h3= participate.event.datetime_options[0].date.strftime("%m/%d")
+              %h5= participate.event.datetime_options[0].date.strftime("(#{%w(日 月 火 水 木 金 土)[participate.event.datetime_options[0].date.wday]})")
+            - else
+              .vote
+                %h5 開催日時
+                %h5 投票中！
           .center
             %h5= link_to participate.event.title.truncate(30), participate.event
             %span
@@ -23,18 +28,19 @@
               - else
                 #{participate.event.participants.length}人
             %br
-            %span
-              = icon 'fas', 'clock'
-              - if participate.event.start_time == nil && participate.event.end_time == nil
-                未定
-              - elsif participate.event.start_time != nil
-                = participate.event.start_time.strftime("%H:%M")
-                〜
-                = participate.event.end_time.strftime("%H:%M") unless participate.event.end_time == nil
-              - else
-                未定〜
-                = participate.event.end_time.strftime("%H:%M")
-            %br
+            - if participate.event.datetime_options.length == 1
+              %span
+                = icon 'fas', 'clock'
+                - if participate.event.datetime_options[0].start_time == nil && participate.event.datetime_options[0].end_time == nil
+                  未定
+                - elsif participate.event.datetime_options[0].start_time != nil
+                  = participate.event.datetime_options[0].start_time.strftime("%H:%M")
+                  〜
+                  = participate.event.datetime_options[0].end_time.strftime("%H:%M") unless participate.event.datetime_options[0].end_time == nil
+                - else
+                  未定〜
+                  = participate.event.datetime_options[0].end_time.strftime("%H:%M")
+              %br
             %span
               = icon 'fas', 'map-marker-alt'
               - if participate.event.address.present?
@@ -53,9 +59,14 @@
         %li.main-group.list
           = link_to '', "/events/#{event.id}", class: 'card-link'
           .left
-            %span= event.date.strftime("%Y")
-            %h3= event.date.strftime("%m/%d")
-            %h5= event.date.strftime("(#{%w(日 月 火 水 木 金 土)[event.date.wday]})")
+            - if event.datetime_options.length == 1
+              %span= event.datetime_options[0].date.strftime("%Y")
+              %h3= event.datetime_options[0].date.strftime("%m/%d")
+              %h5= event.datetime_options[0].date.strftime("(#{%w(日 月 火 水 木 金 土)[event.datetime_options[0].date.wday]})")
+            - else
+              .vote
+                %h5 開催日時
+                %h5 投票中！
           .center
             %h5= link_to event.title.truncate(30), event
             %span
@@ -65,18 +76,19 @@
               - else
                 #{event.participants.length}人
             %br
-            %span
-              = icon 'fas', 'clock'
-              - if event.start_time == nil && event.end_time == nil
-                未定
-              - elsif event.start_time != nil
-                = event.start_time.strftime("%H:%M")
-                〜
-                = event.end_time.strftime("%H:%M") unless event.end_time == nil
-              - else
-                未定〜
-                = event.end_time.strftime("%H:%M")
-            %br
+            - if event.datetime_options.length == 1
+              %span
+                = icon 'fas', 'clock'
+                - if event.datetime_options[0].start_time == nil && event.datetime_options[0].end_time == nil
+                  未定
+                - elsif event.datetime_options[0].start_time != nil
+                  = event.datetime_options[0].start_time.strftime("%H:%M")
+                  〜
+                  = event.datetime_options[0].end_time.strftime("%H:%M") unless event.datetime_options[0].end_time == nil
+                - else
+                  未定〜
+                  = event.datetime_options[0].end_time.strftime("%H:%M")
+              %br
             %span
               = icon 'fas', 'map-marker-alt'
               - if event.address.present?

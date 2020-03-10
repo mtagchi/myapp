@@ -15,18 +15,32 @@
     %br
     = f.text_area :text, class: 'form-control', required: true
 
-  .form-group
-    = f.label :date, "日程"
-    %span.form-require 必須
-    %br
-    = f.date_select :date, class: 'form-control', use_month_numbers: true, date_separator: '/ ', start_year: Time.now.year, end_year: (Time.now.year + 1)
+  -# .form-group
+  -#   = f.label :date, "日程"
+  -#   %span.form-require 必須
+  -#   %br
+  -#   = f.date_select :date, class: 'form-control', use_month_numbers: true, date_separator: '/ ', start_year: Time.now.year, end_year: (Time.now.year + 1)
 
-  .form-group
-    = f.label "時間"
-    %br
-    = f.time_select :start_time, class: 'form-control', include_blank: true
-    〜
-    = f.time_select :end_time, class: 'form-control', include_blank: true
+  -# .form-group
+  -#   = f.label "時間"
+  -#   %br
+  -#   = f.time_select :start_time, class: 'form-control', include_blank: true
+  -#   〜
+  -#   = f.time_select :end_time, class: 'form-control', include_blank: true
+
+  = f.fields_for @datetime_option do |i|
+    .form-group
+      = i.label "日程"
+      %span.form-require 必須
+      %br
+      = i.date_select :date, class: 'form-control', use_month_numbers: true, date_separator: '/ ', start_year: Time.now.year, end_year: (Time.now.year + 1)
+
+    .form-group
+      = i.label "時間"
+      %br
+      = i.time_select :start_time, class: 'form-control', include_blank: true
+      〜
+      = i.time_select :end_time, class: 'form-control', include_blank: true
 
   .form-group
     = f.label :no_of_participants, "参加可能人数"

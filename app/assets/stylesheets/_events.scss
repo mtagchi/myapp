@@ -26,18 +26,33 @@
     li.list {
       display: flex;
       position: relative;
+      height: 121px;
       .card-link {
         display: block;
         position: absolute;
         top: 0;
-        left: 0;
-        width: 100%;
+        left: 80px;
+        width: calc(100% - 80px - 64px);
         height: 100%;
       }
       .left {
         min-width: 80px;
+        height: 100%;
+        .vote {
+          margin: 20px 0;
+          h5 {
+            font-weight: bold;
+          }
+        }
+      }
+      .right {
+        height: 100%;
+        a {
+          margin: 20px 0;
+        }
       }
     }
+
     .upper-info {
       .flexed-info {
         display: flex;

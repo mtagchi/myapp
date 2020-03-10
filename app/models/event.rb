@@ -6,8 +6,8 @@ class Event < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :datetime_options, dependent: :destroy
   validates :title, presence: true
-  validates :date, presence: true
   validates :text, presence: true
+  accepts_nested_attributes_for :datetime_options
   attr_writer :current_step
 
   def current_step

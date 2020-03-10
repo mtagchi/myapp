@@ -15,10 +15,11 @@
         = f.hidden_field :text
         %td= @event.text
 
-      %tr
-        %th= f.label :date, "日程"
-        = f.hidden_field :date
-        %td= @event.date
+      = f.fields_for @datetime_option do |i|
+        %tr
+          %th= i.label :date, "日程"
+          = i.hidden_field :date
+          %td= @datetime_option.date
 
       %tr
         %th= f.label "時間"
