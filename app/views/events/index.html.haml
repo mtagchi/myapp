@@ -7,15 +7,41 @@
       - @events.each do |event|
         %li.main-group.list
           = link_to '', "events/#{event.id}", class: 'card-link'
-          .left
-            - if event.datetime_options.length == 1
+          - if event.datetime_options.length == 1
+            .left
               %span= event.datetime_options[0].date.strftime("%Y")
               %h3= event.datetime_options[0].date.strftime("%m/%d")
               %h5= event.datetime_options[0].date.strftime("(#{%w(日 月 火 水 木 金 土)[event.datetime_options[0].date.wday]})")
-            - else
-              .vote
+          - else
+            .left
+              .vote.tooltip-trigger
                 %h5 開催日時
                 %h5 投票中！
+              .tooltip-body
+                - event.datetime_options.each_with_index do |datetime, i|
+                  - if datetime.date.year == Date.today.year
+                    %p
+                      = "#{i + 1}. #{datetime.date.strftime('%m/%d')}"
+                      = datetime.date.strftime("(#{%w(日 月 火 水 木 金 土)[datetime.date.wday]})")
+                      - if datetime.start_time != nil
+                        = datetime.start_time.strftime("%H:%M")
+                        〜
+                        = datetime.end_time.strftime("%H:%M") unless datetime.end_time == nil
+                      - elsif datetime.start_time == nil && datetime.end_time != nil
+                        未定〜
+                        = datetime.end_time.strftime("%H:%M")
+                  - else
+                    %p
+                      = "#{i + 1}. #{datetime.date.strftime('%Y/%m/%d')}"
+                      = datetime.date.strftime("(#{%w(日 月 火 水 木 金 土)[datetime.date.wday]})")
+                      - if datetime.start_time != nil
+                        = datetime.start_time.strftime("%H:%M")
+                        〜
+                        = datetime.end_time.strftime("%H:%M") unless datetime.end_time == nil
+                      - elsif datetime.start_time == nil && datetime.end_time != nil
+                        未定〜
+                        = datetime.end_time.strftime("%H:%M")
+
           .center
             %h5= link_to event.title.truncate(30), event
             %span

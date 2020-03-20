@@ -206,3 +206,23 @@ li.tag {
 .btn-center {
   text-align: center;
 }
+
+.tooltip-trigger:hover + .tooltip-body {
+  display: block;
+}
+
+.tooltip-body {
+	max-width: 600px;
+  background-color: $header;
+  color: white;
+  display: none;
+  position: absolute;
+  top: 28px;
+  left: 80px;
+  margin-left: 8px;
+  border-radius: 4px;
+  padding: 5px;
+  p {
+    margin-bottom: 0;
+  }
+}
