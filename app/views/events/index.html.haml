@@ -4,7 +4,7 @@
 
   .contents-main
     %ul.events
-      - if @events.length != 0
+      - if @events.length == 0
         %div 現在、開催予定のイベントはありません。
         %div epuloでイベントを開催しませんか？
         .button-group{ style: "border-bottom: 0;" }
