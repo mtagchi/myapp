@@ -42,6 +42,11 @@
     .main-group.event-text
       = @event.text
 
+    - if @event.datetime_options.length > 0
+      .main-group.event-datetime-vote
+        %h4 開催日時
+        %p 希望する日時を投票しませんか？(複数選択)
+
     .main-group.event-place
       %h4 開催場所
       %p
